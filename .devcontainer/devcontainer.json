@@ -1,0 +1,10 @@
+{
+    "name": "devkitPPC",
+    "image": "devkitpro/devkitppc:latest",
+    "postCreateCommand": "bash ./.github/workflows/update.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": ["ms-vscode.cpptools-extension-pack"]
+        }
+    }
+}

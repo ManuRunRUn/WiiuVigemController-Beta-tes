@@ -1,0 +1,34 @@
+# Build directories
+build/
+build_custom/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# Compiled files
+*.o
+*.elf
+*.rpx
+*.wuhb
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backup files
+*_original.txt
+CMakeLists_original.txt
+
+# Dependencies (downloaded by CMake)
+_deps/
+
+# Logs
+*.log
