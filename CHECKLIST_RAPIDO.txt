@@ -1,0 +1,53 @@
+═══════════════════════════════════════════════════════════
+  CHECKLIST RÁPIDO - GitHub Actions Build Fix
+═══════════════════════════════════════════════════════════
+
+PASO 1: ABRIR GITHUB DESKTOP
+  └─ Verás muchos archivos con cambios
+
+PASO 2: SELECCIONAR SOLO ESTOS 7 ARCHIVOS:
+  [ ] .gitattributes
+  [ ] .github/workflows/ci.yml
+  [ ] CMakeLists.txt
+  [ ] CAMBIOS_BUILD.md
+  [ ] INSTRUCCIONES_COMMIT.md
+  [ ] RESUMEN_VERIFICACION.md
+  [ ] normalizar_lineendings.bat
+
+PASO 3: DESMARCAR TODOS LOS DEMÁS
+  └─ Especialmente: devcontainer.json, meta/*, source/*, 
+     source_custom/*, wuhb/*, wuhb_custom/*, pc_client/*
+
+PASO 4: HACER COMMIT
+  └─ Mensaje: "Fix GitHub Actions build configuration"
+
+PASO 5: HACER PUSH
+  └─ Botón "Push origin"
+
+PASO 6: VERIFICAR EN GITHUB
+  └─ Ve a la pestaña "Actions"
+  └─ Espera ~1 minuto
+  └─ Deberías ver ✅ verde
+  └─ Descarga los artifacts (.rpx y .wuhb)
+
+═══════════════════════════════════════════════════════════
+  ¿QUÉ SE ARREGLÓ?
+═══════════════════════════════════════════════════════════
+
+✅ Workflow de GitHub Actions actualizado
+✅ CMakeLists.txt con detección automática de wut
+✅ Nombres de archivos corregidos (WiiUViGEmBusController)
+✅ Paso de debug agregado para ver archivos generados
+✅ Line endings normalizados
+
+═══════════════════════════════════════════════════════════
+  RESULTADO ESPERADO
+═══════════════════════════════════════════════════════════
+
+El build generará:
+  • WiiUViGEmBusController.rpx
+  • WiiUViGEmBusController.wuhb
+
+Disponibles para descargar en GitHub Actions > Artifacts
+
+═══════════════════════════════════════════════════════════
