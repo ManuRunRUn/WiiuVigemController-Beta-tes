@@ -20,8 +20,17 @@ jobs:
 
     - name: Build application
       run: |
+        echo "=== CMake Configuration ==="
         /opt/devkitpro/portlibs/wiiu/bin/powerpc-eabi-cmake -B $GITHUB_WORKSPACE/build
-        cmake --build $GITHUB_WORKSPACE/build -j $(nproc)
+        echo "=== Building ==="
+        cmake --build $GITHUB_WORKSPACE/build -j $(nproc) --verbose
+
+    - name: List build output
+      run: |
+        echo "=== Listing build directory ==="
+        ls -la $GITHUB_WORKSPACE/build/
+        echo "=== Looking for .rpx and .wuhb files ==="
+        find $GITHUB_WORKSPACE/build/ -name "*.rpx" -o -name "*.wuhb"
 
     - name: Prepare artifact
       run: |

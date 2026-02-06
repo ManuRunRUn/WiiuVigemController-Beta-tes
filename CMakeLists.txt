@@ -1,4 +1,17 @@
 cmake_minimum_required(VERSION 3.18)
+
+if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+  if(DEFINED ENV{WUT_ROOT})
+    set(WUT_ROOT $ENV{WUT_ROOT})
+  endif()
+  if(DEFINED ENV{DEVKITPRO})
+    set(WUT_ROOT $ENV{DEVKITPRO}/wut)
+  endif()
+  if(DEFINED WUT_ROOT)
+    set(CMAKE_TOOLCHAIN_FILE "${WUT_ROOT}/share/wut.toolchain.cmake")
+  endif()
+endif()
+
 project(WiiUViGEmBusController)
 
 find_package(PkgConfig REQUIRED)
