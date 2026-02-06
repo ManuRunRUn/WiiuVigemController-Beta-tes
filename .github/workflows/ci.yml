@@ -25,12 +25,12 @@ jobs:
 
     - name: Prepare artifact
       run: |
-        mkdir --parents artifact/MiisendU-Wii-U
-        mv --verbose build/MiisendU-Wii-U.rpx artifact/MiisendU-Wii-U/MiisendU-Wii-U.rpx
-        mv --verbose build/MiisendU-Wii-U.wuhb artifact/MiisendU-Wii-U/MiisendU-Wii-U.wuhb
-        cp --verbose meta/* artifact/MiisendU-Wii-U
+        mkdir --parents artifact/WiiUViGEmBusController
+        mv --verbose build/WiiUViGEmBusController.rpx artifact/WiiUViGEmBusController/WiiUViGEmBusController.rpx
+        mv --verbose build/WiiUViGEmBusController.wuhb artifact/WiiUViGEmBusController/WiiUViGEmBusController.wuhb
+        cp --verbose meta/* artifact/WiiUViGEmBusController
 
     - uses: actions/upload-artifact@v4
       with:
-        name: MiisendU-Wii-U
+        name: WiiUViGEmBusController
         path: artifact/
