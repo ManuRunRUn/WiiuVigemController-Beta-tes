@@ -89,3 +89,9 @@ void ConsoleDrawEnd()
     OSScreenFlipBuffersEx(SCREEN_TV);
     OSScreenFlipBuffersEx(SCREEN_DRC);
 }
+
+void ConsoleDrawEndDRCOnly()
+{
+    DCFlushRange(sBufferDRC, sBufferSizeDRC);
+    OSScreenFlipBuffersEx(SCREEN_DRC);
+}

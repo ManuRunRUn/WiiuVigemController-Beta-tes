@@ -362,30 +362,41 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
         if(vpad_data.tpNormal.touched && !last_touch_state) {
             screen_enabled = !screen_enabled;
             if(!screen_enabled) {
+                // Clear DRC screen when turning off (double buffer)
+                OSScreenClearBufferEx(SCREEN_DRC, 0x00000000);
+                OSScreenFlipBuffersEx(SCREEN_DRC);
                 OSScreenClearBufferEx(SCREEN_DRC, 0x00000000);
                 OSScreenFlipBuffersEx(SCREEN_DRC);
             }
         }
         last_touch_state = vpad_data.tpNormal.touched;
 
-        if(screen_enabled && ConsoleDrawStart() == true) {
+        if(ConsoleDrawStart() == true) {
             const std::string msg_connected = std::format("Connected to {}:{}", IP_ADDRESS, Port);
 
             // Print to TV
             PrintHeader(SCREEN_TV);
             OSScreenPutFontEx(SCREEN_TV, 0, 6, msg_connected.c_str());
             OSScreenPutFontEx(SCREEN_TV, 0, 8, "Streaming controller data to PC...");
-            OSScreenPutFontEx(SCREEN_TV, 0, 10, "Touch GamePad screen to toggle display");
+            if(screen_enabled) {
+                OSScreenPutFontEx(SCREEN_TV, 0, 10, "GamePad display: ON (touch to turn off)");
+            } else {
+                OSScreenPutFontEx(SCREEN_TV, 0, 10, "GamePad display: OFF (touch to turn on)");
+            }
+            OSScreenPutFontEx(SCREEN_TV, 0, 12, "All controllers are active!");
             OSScreenPutFontEx(SCREEN_TV, 0, 16, "Hold HOME to exit");
             PrintCredits(SCREEN_TV, 13);
 
-            // Print to DRC
-            PrintHeader(SCREEN_DRC);
-            OSScreenPutFontEx(SCREEN_DRC, 0, 6, msg_connected.c_str());
-            OSScreenPutFontEx(SCREEN_DRC, 0, 8, "Streaming controller data to PC...");
-            OSScreenPutFontEx(SCREEN_DRC, 0, 10, "Touch screen to turn off display");
-            OSScreenPutFontEx(SCREEN_DRC, 0, 16, "Hold HOME to exit");
-            PrintCredits(SCREEN_DRC, 13);
+            // Print to DRC only if screen is enabled
+            if(screen_enabled) {
+                PrintHeader(SCREEN_DRC);
+                OSScreenPutFontEx(SCREEN_DRC, 0, 6, msg_connected.c_str());
+                OSScreenPutFontEx(SCREEN_DRC, 0, 8, "Streaming controller data to PC...");
+                OSScreenPutFontEx(SCREEN_DRC, 0, 10, "Touch screen to turn off display");
+                OSScreenPutFontEx(SCREEN_DRC, 0, 12, "All controllers active!");
+                OSScreenPutFontEx(SCREEN_DRC, 0, 16, "Hold HOME to exit");
+                PrintCredits(SCREEN_DRC, 13);
+            }
 
             ConsoleDrawEnd();
         }
